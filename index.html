@@ -1,0 +1,25 @@
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+<model-viewer id="chair" camera-controls src="Test.glb" ar ar-modes="webxr scene-viewer quick-look" alt="A 3D model of a chair">
+  <div class="controls">
+    <div>Variant: <select id="variant"></select></div>
+  </div>
+</model-viewer>
+<script>
+const modelViewerVariants = document.querySelector("model-viewer#chair");
+const select = document.querySelector('#variant');
+
+modelViewerVariants.addEventListener('load', () => {
+  const names = modelViewerVariants.availableVariants;
+  for (const name of names) {
+    const option = document.createElement('option');
+    option.value = name;
+    option.textContent = name;
+    select.appendChild(option);
+  }
+});
+
+select.addEventListener('input', (event) => {
+  modelViewerVariants.variantName = event.target.value;
+});
+</script>
